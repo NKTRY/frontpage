@@ -75,9 +75,60 @@
 			<input type="text" class="form-control">
 		</div>
 	</div>
-
-
 </div>
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel">编辑{XXX用户}的信息</h4>
+			</div>
+			<div class="modal-body">
+				<form id="updata-user">
+					<!--隐藏域 用于保存用户的UID值 提交到后台后 需要鉴权-->
+					<input type="hidden" name="uid" value="1">
+					<!--用户名-->
+					<div class="input-group">
+						<span class="glyphicon glyphicon-user input-group-addon" aria-hidden="true"></span>
+						<input type="text" class="form-control" name="username" value="ZLY">
+					</div>
+					<!--前台显示作者-->
+					<div class="input-group">
+						<span class="glyphicon glyphicon-pencil input-group-addon" aria-hidden="true"></span>
+						<input type="text" class="form-control" name="nickname" value="testtest">
+					</div>
+					<!--密码-->
+					<div class="input-group">
+						<span class="glyphicon glyphicon-lock input-group-addon" aria-hidden="true"></span>
+						<input type="text" class="form-control" name="password" placeholder="如果需要重置密码请填写新密码，否则请留空">
+					</div>
+
+					<div class="input-group">
+						<span>权限管理：</span>
+						<label class="checkbox-inline">
+							<input type="checkbox" name="func" value="list">菜单
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" name="func" value="user">用户
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" name="func" value="slider">专题
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" name="func" value="article">文章
+						</label>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" id="updata">更新</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script src="http://cdn.staticfile.org/jquery/1.11.1-rc2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/holder.js"></script>
