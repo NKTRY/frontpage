@@ -56,8 +56,8 @@
 		<div class="col-xs-3 text-center">2014-11-09 17:47:38</div>
 		<div class="col-xs-2 text-center">
 			<div class="btn-group btn-group-xs">
-				<button type="button" class="btn btn-success">编辑</button>
-				<button type="button" class="btn btn-danger disabled">删除</button>
+				<button type="button" class="btn btn-success" onClick="window.open('admin-article-content-1.html')">编辑</button><!--替换对应链接-->
+				<button type="button" class="btn btn-danger disabled" action="del" tid="1">删除</button>
 			</div>
 
 		</div>
@@ -72,19 +72,29 @@
 		<div class="col-xs-3 text-center">2014-11-09 17:47:38</div>
 		<div class="col-xs-2 text-center">
 			<div class="btn-group btn-group-xs">
-				<button type="button" class="btn btn-success">编辑</button>
-				<button type="button" class="btn btn-danger">删除</button>
+				<button type="button" class="btn btn-success" onClick="window.open('admin-article-content-2.html')">编辑</button><!--替换对应链接-->
+				<button type="button" class="btn btn-danger" action="del" tid="2">删除</button>
 			</div>
 
 		</div>
 	</div>
-
-
-
 </div>
 
 <script src="http://cdn.staticfile.org/jquery/1.11.1-rc2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/holder.js"></script>
+<script>
+	//删除逻辑开始
+	$("[action='del']").on('click',function(){
+		var tid=this.getAttribute("tid");
+		$.get("article_del.page",{'tid':tid},function(data){//修改article_del.page为删除用户提交的页面
+			if(data==0){
+				location.reload();
+			}else{
+				window.alert("删除失败，错误原因为："+data+"\n请联系管理员处理");
+			}
+		});
+	})
+</script>
 </body>
 </html>
