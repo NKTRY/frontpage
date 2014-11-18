@@ -124,7 +124,7 @@
             <div class="modal-body">
                 <form id="updata-user">
                     <!--隐藏域 用于保存用户的UID值 提交到后台后 需要鉴权-->
-                    <input type="hidden" name="uid" value="1">
+                    <input type="hidden" name="uid" value="1" class="uid">
                     <!--用户名-->
                     <div class="input-group">
                         <span class="glyphicon glyphicon-user input-group-addon" aria-hidden="true"></span>
@@ -189,6 +189,7 @@
                         $(this).click();
                 });
                 modal.find('.modal-title').text('编辑' + username + "用户的信息");
+                modal.find('.uid').val(uid);
                 modal.find('.username').val(username);
                 modal.find('.nickname').val(nickname);
             }else{
@@ -209,7 +210,6 @@
         func.value=fun.toString();
         var updata_data = $("input[type='text']").serializeArray();
         updata_data.push(func);
-        console.log(updata_data);
         $.post("user_edit.page",updata_data,function(data){//修改user_edit.page为编辑用户提交的页面
             if(data==0){
                 $('#edit').modal('hide');

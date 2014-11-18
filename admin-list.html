@@ -19,9 +19,9 @@
 	.glyphicon{
 		margin-right:10px;
 	}
-	
-	
-	
+	.input-group{
+		margin-bottom:20px;
+	}
 	</style>
 </head>
 <body>
@@ -46,9 +46,9 @@
 		</div>
 		<div class="col-xs-9">
 			<div class="btn-group btn-group-xs">
-				<button type="button" class="btn btn-info add-list">添加</button>
-				<button type="button" class="btn btn-success">编辑</button>
-				<button type="button" class="btn btn-danger">删除</button>
+				<button type="button" class="btn btn-info add-list" id="1">添加</button><!--此处id应为父分类对应id号-->
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit" data-fid="1">编辑</button>
+				<button type="button" class="btn btn-danger disabled" action="del" fid="1">删除</button><!--当父分类下存在子分类时 请添加disabled class-->
 			</div>
 		</div>
 	</div>
@@ -59,8 +59,8 @@
 		<div class="col-xs-6">
 			<div class="btn-group btn-group-xs">
 				<button type="button" class="btn btn-info disabled add-list">添加</button>
-				<button type="button" class="btn btn-success">编辑</button>
-				<button type="button" class="btn btn-danger">删除</button>
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit" data-fid="11">编辑</button>
+				<button type="button" class="btn btn-danger" action="del" fid="11">删除</button>
 			</div>
 		</div>
 	</div>
@@ -71,8 +71,8 @@
 		<div class="col-xs-6">
 			<div class="btn-group btn-group-xs">
 				<button type="button" class="btn btn-info disabled add-list">添加</button>
-				<button type="button" class="btn btn-success">编辑</button>
-				<button type="button" class="btn btn-danger">删除</button>
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit" data-fid="12">编辑</button>
+				<button type="button" class="btn btn-danger" action="del" fid="12">删除</button>
 			</div>
 		</div>
 	</div>
@@ -83,12 +83,54 @@
 		</div>
 		<div class="col-xs-9">
 			<div class="btn-group btn-group-xs">
-				<button type="button" class="btn btn-info add-list">添加</button>
-				<button type="button" class="btn btn-success">编辑</button>
-				<button type="button" class="btn btn-danger">删除</button>
+				<button type="button" class="btn btn-info add-list" id="2">添加</button>
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit" data-fid="2">编辑</button>
+				<button type="button" class="btn btn-danger" action="del" fid="2">删除</button>
 			</div>
 		</div>
 	</div>
+	</div>
+</div>
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel">编辑{XXX分类}的信息</h4>
+			</div>
+			<div class="modal-body">
+				<form id="updata-list">
+					<!--隐藏域 用于保存用户的UID值 提交到后台后 需要鉴权-->
+					<input type="hidden" name="fid" value="1" class="fid">
+					<div class="input-group">
+						<span class="glyphicon glyphicon-tasks input-group-addon" aria-hidden="true"></span>
+						<input type="text" class="form-control listname" name="listname" placeholder="分类名称">
+					</div>
+
+					<div class="input-group">
+						<span class="glyphicon glyphicon-th-list input-group-addon" aria-hidden="true"></span>
+						<select class="form-control" name="parent" id="parent" disabled><!--默认不支持修改 对应的父类会根据浏览器传入的pid变化-->
+							<option value="0">------</option>
+							<option value="1">父分类1</option>
+							<option value="2">父分类2</option>
+							<option value="3">父分类3</option>
+							<option value="4">父分类4</option>
+							<option value="5">父分类5</option>
+						</select>
+					</div>
+
+					<div class="input-group">
+						<span class="glyphicon glyphicon-sort-by-order input-group-addon" aria-hidden="true"></span>
+						<input type="text" class="form-control order" name="order" placeholder="排序(升序)">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" id="updata">更新</button>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -96,10 +138,70 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/holder.js"></script>
 <script>
-	//添加按钮逻辑
-	$(".add-list").on('click',function(){
-		location.href ="admin-list-new.html";
+	//更新弹出逻辑开始
+	$('#edit').on('show.bs.modal',function(event){
+		var button = $(event.relatedTarget)
+		var fid = button.data('fid')
+		var modal = $(this)
+		$.get("list_detail.page",{'fid':fid},function(data){//修改list_detail.page为获取分类信息的页面
+			//返回用户信息 要求字段:listname,parent,order
+			//格式{"listname":"zly","parent":"3","order":"5"}
+			//如果本身已为父分类，parent字段请返回0
+			if(data!=0){
+				var json = $.parseJSON(data);
+
+				var listname = json['listname'];
+				var parent = json['parent'];
+				var order = json['order'];
+
+				modal.find('.modal-title').text('编辑' + listname + "分类的信息");
+				modal.find('.fid').val(fid);
+
+				modal.find('.listname').val(listname);
+				modal.find("#parent").val(parent);
+				modal.find('.order').val(order);
+
+			}else{
+				window.alert("获取分类信息失败\n请联系管理员处理");
+			}
+		});
 	})
+	//更新弹出逻辑结束
+	//更新提交逻辑开始
+	$('#updata').on('click', function () {
+
+		var updata_data = $("#updata-list").serializeArray();
+		console.log(updata_data);
+		$.post("list_edit.page",updata_data,function(data){//修改list_edit.page为编辑分类提交的页面
+			if(data==0){
+				$('#edit').modal('hide');
+				location.reload();
+			}else{
+				window.alert("更新失败，错误原因为："+data+"\n请联系管理员处理");
+			}
+		});
+	})
+	//更新提交逻辑结束
+
+	//添加按钮逻辑开始
+	//根据点击对应父类的编辑按钮 传入不同的父类id值
+	$(".add-list").on('click',function(){
+		location.href ="admin-list-new.html?pid="+this.getAttribute("id");
+	})
+	//添加按钮逻辑结束
+
+	//删除逻辑开始
+	$("[action='del']").on('click',function(){
+		var fid=this.getAttribute("fid");
+		$.get("list_del.page",{'fid':fid},function(data){//修改list_del.page为删除分类提交的页面
+			if(data==0){
+				location.reload();
+			}else{
+				window.alert("删除失败，错误原因为："+data+"\n请联系管理员处理");
+			}
+		});
+	})
+	//删除逻辑结束
 </script>
 </body>
 </html>

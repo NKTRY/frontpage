@@ -30,7 +30,7 @@
     <div class="row">
         <div class="col-xs-12">
             <ul class="nav nav-tabs  nav-justified" role="tablist">
-                <li role="presentation" class="active"><a href="#">分类管理</a></li>
+                <li role="presentation" class="active"><a href="admin-list.html">分类管理</a></li>
                 <li role="presentation"><a href="admin-slider.html">专题管理</a></li>
                 <li role="presentation"><a href="admin-user.html">用户管理</a></li>
                 <li role="presentation"><a href="admin-article-list.html">文章管理</a></li>
@@ -45,12 +45,12 @@
             <form action="add-list.page" method="post"><!--修改add-list.page为添加分类的页面-->
                 <div class="input-group">
                     <span class="glyphicon glyphicon-tasks input-group-addon" aria-hidden="true"></span>
-                    <input type="text" class="form-control" name="username" placeholder="分类名称">
+                    <input type="text" class="form-control" name="listname" placeholder="分类名称">
                 </div>
 
                 <div class="input-group">
                     <span class="glyphicon glyphicon-th-list input-group-addon" aria-hidden="true"></span>
-                    <select class="form-control" name="parent">
+                    <select class="form-control" name="parent" id="parent"><!--对应的父类会根据浏览器传入的pid变化-->
                         <option value="1">父分类1</option>
                         <option value="2">父分类2</option>
                         <option value="3">父分类3</option>
@@ -61,7 +61,7 @@
 
                 <div class="input-group">
                     <span class="glyphicon glyphicon-sort-by-order input-group-addon" aria-hidden="true"></span>
-                    <input type="text" class="form-control" name="password" placeholder="排序(升序)">
+                    <input type="text" class="form-control" name="order" placeholder="排序(升序)">
                 </div>
 
                 <div class="form-group">
@@ -77,5 +77,32 @@
 <script src="http://cdn.staticfile.org/jquery/1.11.1-rc2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/holder.js"></script>
+<script>
+    (function($) {
+        $.extend({
+            urlGet:function()
+            {
+                var aQuery = window.location.href.split("?");  //取得Get参数
+                var aGET = new Array();
+                if(aQuery.length > 1)
+                {
+                    var aBuf = aQuery[1].split("&");
+                    for(var i=0, iLoop = aBuf.length; i<iLoop; i++)
+                    {
+                        var aTmp = aBuf[i].split("=");  //分离key与Value
+                        aGET[aTmp[0]] = aTmp[1];
+                    }
+                }
+                return aGET;
+            }
+        })
+    })(jQuery);
+</script>
+<script>
+    //根据浏览器传入的pid自动变化
+    var GET = $.urlGet();
+    var pid = GET['pid'];
+    $("#parent").val(pid);
+</script>
 </body>
 </html>
