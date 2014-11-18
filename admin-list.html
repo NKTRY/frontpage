@@ -46,7 +46,7 @@
 		</div>
 		<div class="col-xs-9">
 			<div class="btn-group btn-group-xs">
-				<button type="button" class="btn btn-info">添加</button>
+				<button type="button" class="btn btn-info add-list">添加</button>
 				<button type="button" class="btn btn-success">编辑</button>
 				<button type="button" class="btn btn-danger">删除</button>
 			</div>
@@ -58,7 +58,7 @@
 		</div>
 		<div class="col-xs-6">
 			<div class="btn-group btn-group-xs">
-				<button type="button" class="btn btn-info disabled">添加</button>
+				<button type="button" class="btn btn-info disabled add-list">添加</button>
 				<button type="button" class="btn btn-success">编辑</button>
 				<button type="button" class="btn btn-danger">删除</button>
 			</div>
@@ -70,7 +70,7 @@
 		</div>
 		<div class="col-xs-6">
 			<div class="btn-group btn-group-xs">
-				<button type="button" class="btn btn-info disabled">添加</button>
+				<button type="button" class="btn btn-info disabled add-list">添加</button>
 				<button type="button" class="btn btn-success">编辑</button>
 				<button type="button" class="btn btn-danger">删除</button>
 			</div>
@@ -83,7 +83,7 @@
 		</div>
 		<div class="col-xs-9">
 			<div class="btn-group btn-group-xs">
-				<button type="button" class="btn btn-info">添加</button>
+				<button type="button" class="btn btn-info add-list">添加</button>
 				<button type="button" class="btn btn-success">编辑</button>
 				<button type="button" class="btn btn-danger">删除</button>
 			</div>
@@ -95,5 +95,11 @@
 <script src="http://cdn.staticfile.org/jquery/1.11.1-rc2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/holder.js"></script>
+<script>
+	//添加按钮逻辑
+	$(".add-list").on('click',function(){
+		location.href ="admin-list-new.html";
+	})
+</script>
 </body>
 </html>
