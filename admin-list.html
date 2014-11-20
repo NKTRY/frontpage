@@ -148,8 +148,7 @@
 		var button = $(event.relatedTarget)
 		var fid = button.data('fid')
 		var modal = $(this)
-		//$.get("list_detail.page",{'fid':fid},function(data){//修改list_detail.page为获取分类信息的页面
-		$.get("test.html",{'fid':fid},function(data){//修改list_detail.page为获取分类信息的页面
+		$.get("list_detail.page",{'fid':fid},function(data){//修改list_detail.page为获取分类信息的页面
 
 			//返回用户信息 要求字段:listname,parent,order
 			//格式{"listname":"zly","parent":"3","order":"5"}
