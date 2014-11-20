@@ -124,21 +124,21 @@
             <div class="modal-body">
                 <form id="updata-user">
                     <!--隐藏域 用于保存用户的UID值 提交到后台后 需要鉴权-->
-                    <input type="hidden" name="uid" value="1" class="uid">
+                    <input type="hidden" name="uid" value="1" class="input uid">
                     <!--用户名-->
                     <div class="input-group">
                         <span class="glyphicon glyphicon-user input-group-addon" aria-hidden="true"></span>
-                        <input type="text" class="form-control username" name="username">
+                        <input type="text" class="input form-control username" name="username">
                     </div>
                     <!--前台显示作者-->
                     <div class="input-group">
                         <span class="glyphicon glyphicon-pencil input-group-addon" aria-hidden="true"></span>
-                        <input type="text" class="form-control nickname" name="nickname">
+                        <input type="text" class="input form-control nickname" name="nickname">
                     </div>
                     <!--密码-->
                     <div class="input-group">
                         <span class="glyphicon glyphicon-lock input-group-addon" aria-hidden="true"></span>
-                        <input type="text" class="form-control" name="password" placeholder="如果需要重置密码请填写新密码，否则请留空">
+                        <input type="text" class="input form-control" name="password" placeholder="如果需要重置密码请填写新密码，否则请留空">
                     </div>
 
                     <div class="input-group">
@@ -208,7 +208,7 @@
         var func=new Object;
         func.name="func";
         func.value=fun.toString();
-        var updata_data = $("input[type='text']").serializeArray();
+        var updata_data = $(".input").serializeArray();
         updata_data.push(func);
         $.post("user_edit.page",updata_data,function(data){//修改user_edit.page为编辑用户提交的页面
             if(data==0){

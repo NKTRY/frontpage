@@ -106,8 +106,9 @@
 			</div>
 			<div class="modal-body">
 				<form id="updata-list">
-					<!--隐藏域 用于保存用户的UID值 提交到后台后 需要鉴权-->
+					<!--隐藏域 用于保存分类的sid值-->
 					<input type="hidden" name="fid" value="1" class="fid">
+
 					<div class="input-group">
 						<span class="glyphicon glyphicon-tasks input-group-addon" aria-hidden="true"></span>
 						<input type="text" class="form-control listname" name="listname" placeholder="分类名称">
@@ -115,7 +116,7 @@
 
 					<div class="input-group">
 						<span class="glyphicon glyphicon-th-list input-group-addon" aria-hidden="true"></span>
-						<select class="form-control" name="parent" id="parent" disabled><!--默认不支持修改 对应的父类会根据浏览器传入的pid变化-->
+						<select class="form-control" name="parent" id="parent"><!--对应的父类会根据浏览器传入的pid变化-->
 							<option value="0">------</option>
 							<option value="1">父分类1</option>
 							<option value="2">父分类2</option>
@@ -131,6 +132,7 @@
 					</div>
 				</form>
 			</div>
+			<hr>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				<button type="button" class="btn btn-primary" id="updata">更新</button>
@@ -162,7 +164,6 @@
 
 				modal.find('.modal-title').text('编辑' + listname + "分类的信息");
 				modal.find('.fid').val(fid);
-
 				modal.find('.listname').val(listname);
 				modal.find("#parent").val(parent);
 				modal.find('.order').val(order);

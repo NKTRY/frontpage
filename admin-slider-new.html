@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ch-hanz">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NKTC管理中心-首页</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <!--[if lt IE 9]>
+    <script src="http://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="http://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .row{
+            margin-bottom:10px;
+        }
+        .glyphicon{
+            margin-right:10px;
+        }
+        .input-group{
+            margin-bottom:20px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="nav nav-tabs  nav-justified" role="tablist">
+                <li role="presentation"><a href="admin-list.html">分类管理</a></li>
+                <li role="presentation" class="active"><a href="admin-slider.html">专题管理</a></li>
+                <li role="presentation"><a href="admin-user.html">用户管理</a></li>
+                <li role="presentation"><a href="admin-article-list.html">文章管理</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top:20px;">
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+            <h4 class="text-center" style="margin-bottom:40px">添加专题</h4>
+            <form action="add-slider.page" method="post"><!--修改add-slider.page为添加专题的页面-->
+                <div class="input-group">
+                    <span class="glyphicon glyphicon-pencil input-group-addon" aria-hidden="true"></span>
+                    <input type="text" class="form-control" name="slidername" placeholder="专题名称">
+                </div>
+
+                <div class="input-group">
+                    <span class=" glyphicon glyphicon-picture input-group-addon" aria-hidden="true"></span>
+                    <input type="text" class="form-control" name="picurl" placeholder="图片地址"><!--你可以把这个做成上传的-->
+                </div>
+
+                <div class="input-group">
+                    <span class="glyphicon glyphicon-globe input-group-addon" aria-hidden="true"></span>
+                    <input type="text" class="form-control" name="linkurl" placeholder="专题页面地址">
+                </div>
+
+                <div class="input-group">
+                    <span class="glyphicon glyphicon-sort-by-order input-group-addon" aria-hidden="true"></span>
+                    <input type="text" class="form-control" name="order" placeholder="排序(升序)">
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12 text-center">
+                        <button type="submit" class="btn btn-default">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="http://cdn.staticfile.org/jquery/1.11.1-rc2/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/holder.js"></script>
+</body>
+</html>

@@ -78,6 +78,12 @@
 
 		</div>
 	</div>
+	<hr>
+	<div class="row">
+		<div class="col-xs-2 col-xs-offset-10 text-center">
+			<button type="button" class="btn btn-warning" id="add-article">添加文章</button>
+		</div>
+	</div>
 </div>
 
 <script src="http://cdn.staticfile.org/jquery/1.11.1-rc2/jquery.min.js"></script>
@@ -94,6 +100,10 @@
 				window.alert("删除失败，错误原因为："+data+"\n请联系管理员处理");
 			}
 		});
+	})
+	//添加按钮逻辑
+	$("#add-article").on('click',function(){
+		location.href ="admin-article-new.html";
 	})
 </script>
 </body>

@@ -19,9 +19,9 @@
 	.glyphicon{
 		margin-right:10px;
 	}
-	
-	
-	
+	.input-group{
+		margin-bottom:20px;
+	}
 	</style>
 
 </head>
@@ -41,38 +41,40 @@
 <div class="container" style="margin-top:20px;">
 	<div class="row">
 		<div class="col-xs-1 text-center">#</div>
-		<div class="col-xs-5 text-center">标题</div>
+		<div class="col-xs-3 text-center">标题</div>
 		<div class="col-xs-3 text-center">图片URL</div>
 		<div class="col-xs-3 text-center">链接URL</div>
+		<div class="col-xs-2 text-center">操作</div>
 	</div>
-	
+
 	<div class="row">
-		<div class="col-xs-1">
-			<input type="text" class="form-control">
-		</div>
-		<div class="col-xs-5">
-			<input type="text" class="form-control" placeholder="新闻标题">
-		</div>
-		<div class="col-xs-3">
-			<input type="text" class="form-control" placeholder="http://nktry.com/zly.jpg">
-		</div>
-		<div class="col-xs-3">
-			<input type="text" class="form-control" placeholder="http://nktry.com/xhy.html">
+		<div class="col-xs-1 text-center">1</div>
+		<div class="col-xs-3 text-center">我叫ZLY</div>
+		<div class="col-xs-3 text-center">/img/zly.jpg</div>
+		<div class="col-xs-3 text-center">/NKTC/robot/xhy</div>
+		<div class="col-xs-2 text-center">
+			<div class="btn-group btn-group-xs">
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit" data-sid="1">编辑</button>
+				<button type="button" class="btn btn-danger" action="del" sid="1">删除</button>
+			</div>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-xs-1">
-			<input type="text" class="form-control">
+		<div class="col-xs-1 text-center">2</div>
+		<div class="col-xs-3 text-center">我叫ZLY啊我叫ZLY</div>
+		<div class="col-xs-3 text-center">/img/zly&xhy.jpg</div>
+		<div class="col-xs-3 text-center">/NKTC/robot/xhy&zly</div>
+		<div class="col-xs-2 text-center">
+			<div class="btn-group btn-group-xs">
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit" data-sid="2">编辑</button>
+				<button type="button" class="btn btn-danger" action="del" sid="2">删除</button>
+			</div>
 		</div>
-		<div class="col-xs-5">
-			<input type="text" class="form-control">
-		</div>
-		<div class="col-xs-3">
-			<input type="text" class="form-control">
-		</div>
-		<div class="col-xs-3">
-			<input type="text" class="form-control">
+	</div>
+	<div class="row">
+		<div class="col-xs-2 col-xs-offset-10 text-center">
+			<button type="button" class="btn btn-warning" id="add-slider">添加专题</button>
 		</div>
 	</div>
 </div>
@@ -85,42 +87,33 @@
 				<h4 class="modal-title" id="myModalLabel">编辑{XX名称}专题</h4>
 			</div>
 			<div class="modal-body">
-				<form id="updata-user">
-					<!--隐藏域 用于保存用户的UID值 提交到后台后 需要鉴权-->
-					<input type="hidden" name="uid" value="1">
-					<!--用户名-->
-					<div class="input-group">
-						<span class="glyphicon glyphicon-user input-group-addon" aria-hidden="true"></span>
-						<input type="text" class="form-control" name="username" value="ZLY">
-					</div>
-					<!--前台显示作者-->
+				<form id="updata-slider">
+					<!--隐藏域 用于保存专题的SID值-->
+					<input type="hidden" name="sid" value="1" class="sid">
+
 					<div class="input-group">
 						<span class="glyphicon glyphicon-pencil input-group-addon" aria-hidden="true"></span>
-						<input type="text" class="form-control" name="nickname" value="testtest">
-					</div>
-					<!--密码-->
-					<div class="input-group">
-						<span class="glyphicon glyphicon-lock input-group-addon" aria-hidden="true"></span>
-						<input type="text" class="form-control" name="password" placeholder="如果需要重置密码请填写新密码，否则请留空">
+						<input type="text" class="form-control" name="slidername" placeholder="专题名称">
 					</div>
 
 					<div class="input-group">
-						<span>权限管理：</span>
-						<label class="checkbox-inline">
-							<input type="checkbox" name="func" value="list">菜单
-						</label>
-						<label class="checkbox-inline">
-							<input type="checkbox" name="func" value="user">用户
-						</label>
-						<label class="checkbox-inline">
-							<input type="checkbox" name="func" value="slider">专题
-						</label>
-						<label class="checkbox-inline">
-							<input type="checkbox" name="func" value="article">文章
-						</label>
+						<span class=" glyphicon glyphicon-picture input-group-addon" aria-hidden="true"></span>
+						<input type="text" class="form-control" name="picurl" placeholder="图片地址"><!--你可以把这个做成上传的-->
 					</div>
+
+					<div class="input-group">
+						<span class="glyphicon glyphicon-globe input-group-addon" aria-hidden="true"></span>
+						<input type="text" class="form-control" name="linkurl" placeholder="专题页面地址">
+					</div>
+
+					<div class="input-group">
+						<span class="glyphicon glyphicon-sort-by-order input-group-addon" aria-hidden="true"></span>
+						<input type="text" class="form-control" name="order" placeholder="排序(升序)">
+					</div>
+
 				</form>
 			</div>
+			<hr>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				<button type="button" class="btn btn-primary" id="updata">更新</button>
@@ -132,5 +125,67 @@
 <script src="http://cdn.staticfile.org/jquery/1.11.1-rc2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/holder.js"></script>
+<script>
+	//更新弹出逻辑开始
+	$('#edit').on('show.bs.modal',function(event){
+		var button = $(event.relatedTarget)
+		var sid = button.data('sid')
+		var modal = $(this)
+		$.get("user_detail.page",{'uid':uid},function(data){//修改user_detail.page为获取专题信息的页面
+
+			//返回用户信息 要求字段:slidername,picurl,linkurl,order
+			//格式{"slidername":"zly","picurl":"/img/abc.jpg","linkurl":"/NTKC/robot/xhy","order":"5"}
+			if(data!=0){
+				var json = $.parseJSON(data);
+
+				var slidername = json['slidername'];
+				var picurl = json['picurl'];
+				var linkurl = json['linkurl'];
+				var order = json['order'];
+
+				modal.find('.modal-title').text('编辑' + slidername + "专题的信息");
+				modal.find('.sid').val(sid);
+				modal.find('.slidername').val(slidername);
+				modal.find('.picurl').val(picurl);
+				modal.find('.linkurl').val(linkurl);
+				modal.find('.order').val(order);
+			}else{
+				window.alert("获取专题信息失败\n请联系管理员处理");
+			}
+		});
+	})
+	//更新弹出逻辑结束
+	//更新提交逻辑开始
+	$('#updata').on('click', function () {
+		var updata_data = $("#updata-slider").serializeArray();
+		console.log(updata_data);
+		$.post("slider_edit.page",updata_data,function(data){//修改slider_edit.page为编辑专题提交的页面
+			if(data==0){
+				$('#edit').modal('hide');
+				location.reload();
+			}else{
+				window.alert("更新失败，错误原因为："+data+"\n请联系管理员处理");
+			}
+		});
+	})
+	//更新提交逻辑结束
+
+	//删除逻辑开始
+	$("[action='del']").on('click',function(){
+		var sid=this.getAttribute("sid");
+		$.get("slider_del.page",{'sid':sid},function(data){//修改user_del.page为删除专题提交的页面
+			if(data==0){
+				location.reload();
+			}else{
+				window.alert("删除失败，错误原因为："+data+"\n请联系管理员处理");
+			}
+		});
+	})
+	//删除逻辑结束
+	//添加按钮逻辑
+	$("#add-slider").on('click',function(){
+		location.href ="admin-slider-new.html";
+	})
+</script>
 </body>
 </html>
