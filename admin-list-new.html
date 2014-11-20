@@ -51,6 +51,7 @@
                 <div class="input-group">
                     <span class="glyphicon glyphicon-th-list input-group-addon" aria-hidden="true"></span>
                     <select class="form-control" name="parent" id="parent"><!--对应的父类会根据浏览器传入的pid变化-->
+                        <option value="0">------</option>
                         <option value="1">父分类1</option>
                         <option value="2">父分类2</option>
                         <option value="3">父分类3</option>
@@ -78,6 +79,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/holder.js"></script>
 <script>
+    //定义了一个函数 无视掉就好
     (function($) {
         $.extend({
             urlGet:function()

@@ -83,12 +83,17 @@
 		</div>
 		<div class="col-xs-9">
 			<div class="btn-group btn-group-xs">
-				<button type="button" class="btn btn-info add-list" id="2">添加</button>
+				<button type="button" class="btn btn-info add-list" id="2">添加</button><!--此处id应为父分类对应id号-->
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit" data-fid="2">编辑</button>
 				<button type="button" class="btn btn-danger" action="del" fid="2">删除</button>
 			</div>
 		</div>
 	</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-2 col-xs-offset-3 text-center">
+			<button type="button" class="btn btn-warning btn-xs add-list" id="0">点击我添加父分类</button>
+		</div>
 	</div>
 </div>
 
@@ -143,7 +148,9 @@
 		var button = $(event.relatedTarget)
 		var fid = button.data('fid')
 		var modal = $(this)
-		$.get("list_detail.page",{'fid':fid},function(data){//修改list_detail.page为获取分类信息的页面
+		//$.get("list_detail.page",{'fid':fid},function(data){//修改list_detail.page为获取分类信息的页面
+		$.get("test.html",{'fid':fid},function(data){//修改list_detail.page为获取分类信息的页面
+
 			//返回用户信息 要求字段:listname,parent,order
 			//格式{"listname":"zly","parent":"3","order":"5"}
 			//如果本身已为父分类，parent字段请返回0
